@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Indha Lombok Explore — Snorkeling Kepulauan Gili</title>
+<meta name="description" content="Trip snorkeling bersama dan privat di sekitar Kepulauan Gili. Berenang bersama penyu laut, jelajahi terumbu karang, dan taman patung bawah air di Gili Meno.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,500&family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --reef-navy:#0A2E3D;
+    --reef-navy-90: rgba(10,46,61,.92);
+    --lagoon:#125B66;
+    --turquoise:#4FD8CE;
+    --coral:#FF6B47;
+    --coral-dim:#d9552f;
+    --sand:#F3EAD6;
+    --foam:#FBFDFC;
+    --ink:#0A2320;
+    --line: rgba(10,46,61,.14);
+
+    --display: 'Fraunces', serif;
+    --body: 'Space Grotesk', sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:var(--body);
+    color:var(--ink);
+    background:var(--foam);
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img{display:block;max-width:100%;height:auto;}
+  a{color:inherit;text-decoration:none;}
+
+  .wrap{width:min(1180px, 92%);margin-inline:auto;}
+
+  .caustic{width:100%;height:28px;display:block;}
+  .caustic path{fill:none;stroke-width:1.6;}
+
+  header.nav{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px min(6%, 60px);
+    background:linear-gradient(to bottom, rgba(10,46,61,.55), transparent);
+    transition:background .3s ease, backdrop-filter .3s ease;
+  }
+  header.nav.solid{
+    background:var(--reef-navy-90);
+    backdrop-filter:blur(6px);
+    box-shadow:0 1px 0 rgba(255,255,255,.06);
+  }
+  .brand{
+    font-family:var(--display);
+    font-weight:600;
+    font-size:1.05rem;
+    color:var(--foam);
+    letter-spacing:.01em;
+    line-height:1.1;
+  }
+  .brand span{
+    display:block;
+    font-family:var(--mono);
+    font-size:.58rem;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--turquoise);
+    margin-top:3px;
+  }
+  .nav-cta{
+    font-family:var(--mono);
+    font-size:.72rem;
+    letter-spacing:.05em;
+    text-transform:uppercase;
+    color:var(--reef-navy);
+    background:var(--turquoise);
+    padding:10px 18px;
+    border-radius:2px;
+    transition:background .2s ease, transform .2s ease;
+  }
+  .nav-cta:hover{background:var(--coral); color:var(--foam); transform:translateY(-1px);}
+
+  .hero{
+    position:relative;
+    min-height:100vh;
+    display:flex;
+    align-items:flex-end;
+    background:var(--reef-navy);
+  }
+  .hero-img{
+    position:absolute;inset:0;
+    width:100%;height:100%;
+    object-fit:cover;
+    object-position:50% 32%;
+  }
+  .hero-overlay{
+    position:absolute;inset:0;
+    background:linear-gradient(180deg, rgba(10,46,61,.15) 0%, rgba(10,46,61,.1) 40%, rgba(6,26,34,.92) 92%);
+  }
+  .hero-content{
+    position:relative;z-index:2;
+    width:min(1180px, 92%);
+    margin-inline:auto;
+    padding-bottom:min(9vh, 90px);
+    color:var(--foam);
+  }
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:.72rem;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--turquoise);
+    margin-bottom:18px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .eyebrow::before{content:'';width:26px;height:1px;background:var(--turquoise);}
+  h1{
+    font-family:var(--display);
+    font-weight:500;
+    font-size:clamp(2.4rem, 6vw, 4.6rem);
+    line-height:1.04;
+    max-width:14ch;
+    letter-spacing:-.01em;
+  }
+  h1 em{font-style:italic; font-weight:500; color:var(--turquoise);}
+  .hero-sub{
+    margin-top:22px;
+    font-size:1.05rem;
+    line-height:1.6;
+    max-width:42ch;
+    color:rgba(251,253,252,.82);
+  }
+  .hero-actions{margin-top:34px; display:flex; gap:16px; flex-wrap:wrap; align-items:center;}
+  .btn-primary{
+    font-family:var(--mono);
+    font-size:.78rem;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    background:var(--coral);
+    color:var(--foam);
+    padding:16px 26px;
+    border-radius:2px;
+    display:inline-flex;align-items:center;gap:10px;
+    transition:background .2s ease, transform .2s ease;
+  }
+  .btn-primary:hover{background:#ff8163;transform:translateY(-2px);}
+  .btn-ghost{
+    font-family:var(--mono);
+    font-size:.78rem;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--foam);
+    padding:16px 6px;
+    border-bottom:1px solid rgba(251,253,252,.4);
+  }
+  .btn-ghost:hover{border-color:var(--turquoise); color:var(--turquoise);}
+
+  section{padding:min(11vh,110px) 0;}
+  .section-tag{
+    font-family:var(--mono);
+    font-size:.72rem;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    color:var(--coral-dim);
+    margin-bottom:16px;
+  }
+  h2{
+    font-family:var(--display);
+    font-weight:500;
+    font-size:clamp(1.8rem, 3.4vw, 2.7rem);
+    line-height:1.12;
+    max-width:20ch;
+  }
+  .lede{margin-top:18px; font-size:1.02rem; line-height:1.7; max-width:56ch; color:rgba(10,35,32,.72);}
+
+  .intro{background:var(--sand);}
+  .intro .grid{display:grid; grid-template-columns:1.1fr .9fr; gap:60px; align-items:end;}
+  .intro-stats{display:flex; gap:38px; margin-top:36px; flex-wrap:wrap;}
+  .stat b{display:block; font-family:var(--display); font-size:2.1rem; color:var(--lagoon);}
+  .stat span{
+    font-family:var(--mono);
+    font-size:.68rem;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:rgba(10,35,32,.55);
+  }
+
+  .tours{background:var(--reef-navy); color:var(--foam);}
+  .tours .section-tag{color:var(--turquoise);}
+  .tours h2{color:var(--foam);}
+  .tours .lede{color:rgba(251,253,252,.68);}
+  .tour-grid{margin-top:56px; display:grid; grid-template-columns:1fr 1fr; gap:2px; background:rgba(251,253,252,.14);}
+  .tour-card{background:var(--reef-navy); padding:44px 40px; position:relative;}
+  .tour-card.private{background:#0d3846;}
+  .tour-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    border-bottom:1px solid rgba(251,253,252,.16);
+    padding-bottom:24px;
+    margin-bottom:28px;
+  }
+  .tour-name{font-family:var(--display); font-size:1.5rem; font-weight:500;}
+  .tour-name span{
+    display:block;
+    font-family:var(--mono);
+    font-size:.66rem;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--turquoise);
+    margin-top:6px;
+  }
+  .tour-duration{font-family:var(--mono); font-size:2rem; color:var(--coral); line-height:1; text-align:right;}
+  .tour-duration small{
+    display:block;
+    font-size:.6rem;
+    letter-spacing:.12em;
+    color:rgba(251,253,252,.55);
+    margin-top:4px;
+    text-align:right;
+  }
+  .tour-list{list-style:none;}
+  .tour-list li{
+    display:flex;
+    gap:12px;
+    padding:11px 0;
+    font-size:.94rem;
+    line-height:1.5;
+    color:rgba(251,253,252,.86);
+    border-bottom:1px solid rgba(251,253,252,.07);
+  }
+  .tour-list li::before{content:'—'; color:var(--turquoise); flex-shrink:0;}
+  .tour-cta{
+    margin-top:30px;
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    font-family:var(--mono);
+    font-size:.72rem;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--turquoise);
+    border-bottom:1px solid rgba(79,216,206,.4);
+    padding-bottom:4px;
+  }
+  .tour-cta:hover{color:var(--coral); border-color:var(--coral);}
+
+  .gallery{background:var(--foam);}
+  .gallery-head{display:flex; justify-content:space-between; align-items:flex-end; gap:30px; flex-wrap:wrap;}
+  .gallery-grid{margin-top:50px; display:grid; grid-template-columns:repeat(4, 1fr); grid-auto-rows:190px; gap:8px;}
+  .gallery-grid figure{position:relative; overflow:hidden; margin:0;}
+  .gallery-grid img{width:100%;height:100%;object-fit:cover; transition:transform .6s cubic-bezier(.2,.7,.2,1);}
+  .gallery-grid figure:hover img{transform:scale(1.07);}
+  .g-wide{grid-column:span 2; grid-row:span 2;}
+  .g-tall{grid-row:span 2;}
+
+  .departures{background:var(--lagoon); color:var(--foam);}
+  .departures .section-tag{color:var(--turquoise);}
+  .departures h2{color:var(--foam);}
+  .dep-map-link{margin-top:18px; text-align:right;}
+  .dep-map-link a{
+    font-family:var(--mono);
+    font-size:.75rem;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--turquoise);
+    border-bottom:1px solid rgba(79,216,206,.4);
+    padding-bottom:3px;
+  }
+  .dep-map-link a:hover{color:var(--coral); border-color:var(--coral);}
+  .dep-grid{margin-top:54px; display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:rgba(251,253,252,.18);}
+  .dep-card{background:var(--lagoon); padding:34px 30px;}
+  .dep-index{font-family:var(--mono); font-size:.68rem; letter-spacing:.14em; color:var(--turquoise); margin-bottom:16px;}
+  .dep-card h3{font-family:var(--display); font-weight:500; font-size:1.3rem; margin-bottom:10px;}
+  .dep-card p{font-size:.92rem; line-height:1.6; color:rgba(251,253,252,.72);}
+
+  .closing{position:relative; min-height:70vh; display:flex; align-items:center; background:var(--reef-navy);}
+  .closing-img{position:absolute;inset:0; width:100%;height:100%; object-fit:cover;}
+  .closing-overlay{
+    position:absolute;inset:0;
+    background:linear-gradient(100deg, rgba(6,26,34,.9) 20%, rgba(6,26,34,.35) 60%, rgba(6,26,34,.75) 100%);
+  }
+  .closing-content{position:relative;z-index:2; width:min(1180px,92%);margin-inline:auto; color:var(--foam);}
+  .closing-content p.quote{
+    font-family:var(--display);
+    font-style:italic;
+    font-size:clamp(1.4rem,3vw,2.1rem);
+    max-width:20ch;
+    line-height:1.35;
+  }
+  .closing-content .who{
+    margin-top:20px;
+    font-family:var(--mono);
+    font-size:.72rem;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--turquoise);
+  }
+
+  footer{background:#06181f; color:var(--foam); padding:min(9vh,90px) 0 40px;}
+  .foot-grid{display:grid; grid-template-columns:1.1fr .7fr .7fr .7fr; gap:40px;}
+  .foot-brand{font-family:var(--display); font-size:1.7rem; font-weight:500;}
+  .foot-brand span{
+    display:block;
+    margin-top:10px;
+    font-family:var(--body);
+    font-size:.92rem;
+    font-weight:400;
+    color:rgba(251,253,252,.6);
+    max-width:34ch;
+    line-height:1.6;
+  }
+  .foot-col h4{
+    font-family:var(--mono);
+    font-size:.68rem;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--turquoise);
+    margin-bottom:16px;
+  }
+  .foot-col p, .foot-col a{display:block; font-size:.95rem; line-height:1.9; color:rgba(251,253,252,.82);}
+  .foot-col a:hover{color:var(--coral);}
+  .foot-social{display:flex; gap:12px; margin-top:24px;}
+  .foot-social a{
+    width:38px;height:38px;
+    border-radius:50%;
+    border:1px solid rgba(251,253,252,.25);
+    display:flex;align-items:center;justify-content:center;
+    color:rgba(251,253,252,.82);
+    transition:background .2s ease, border-color .2s ease, color .2s ease;
+  }
+  .foot-social a:hover{background:var(--coral); border-color:var(--coral); color:var(--foam);}
+  .foot-bottom{
+    margin-top:70px;
+    padding-top:26px;
+    padding-right:80px;
+    border-top:1px solid rgba(251,253,252,.12);
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:14px;
+    font-family:var(--mono);
+    font-size:.68rem;
+    letter-spacing:.06em;
+    color:rgba(251,253,252,.4);
+  }
+
+  .fab-stack{
+    position:fixed;
+    bottom:26px;right:26px;
+    z-index:60;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    align-items:center;
+  }
+  .fab{
+    width:52px;height:52px;
+    border-radius:50%;
+    border:none;
+    background:var(--reef-navy);
+    color:var(--turquoise);
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 8px 20px rgba(10,46,61,.35);
+    cursor:pointer;
+    transition:transform .2s ease, background .2s ease, color .2s ease;
+  }
+  .fab:hover{background:var(--coral); color:var(--foam); transform:scale(1.08);}
+  .fab-top{
+    opacity:0;
+    visibility:hidden;
+    transform:translateY(8px);
+    pointer-events:none;
+    transition:opacity .25s ease, transform .25s ease, visibility .25s ease, background .2s ease, color .2s ease;
+  }
+  .fab-top.show{
+    opacity:1;
+    visibility:visible;
+    transform:translateY(0);
+    pointer-events:auto;
+  }
+
+  @media (max-width: 880px){
+    .intro .grid{grid-template-columns:1fr; gap:30px;}
+    .tour-grid{grid-template-columns:1fr;}
+    .gallery-grid{grid-template-columns:repeat(2,1fr); grid-auto-rows:150px;}
+    .g-wide{grid-column:span 2; grid-row:span 1;}
+    .dep-grid{grid-template-columns:1fr;}
+    .foot-grid{grid-template-columns:1fr; gap:36px;}
+    .foot-bottom{padding-right:0;}
+    h1{max-width:100%;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{transition:none !important; scroll-behavior:auto !important;}
+  }
+
+  :focus-visible{outline:2px solid var(--coral); outline-offset:3px;}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <symbol id="caustic-line" viewBox="0 0 400 28">
+      <path d="M0 14 Q 20 2, 38 14 T 76 14 Q 96 24, 114 14 T 152 14 Q 172 4, 190 14 T 228 14 Q 248 22, 266 14 T 304 14 Q 324 4, 342 14 T 400 14" />
+    </symbol>
+  </defs>
+</svg>
+
+<header class="nav" id="siteNav">
+  <a href="#top" class="brand">The Indha<span>Jelajahi Lombok</span></a>
+  <a class="nav-cta" href="https://wa.me/6287757385043?text=Halo%2C%20saya%20ingin%20bertanya%20tentang%20trip%20snorkeling%20di%20The%20Indha%20Lombok%20Explore." target="_blank" rel="noopener">Pesan di WhatsApp</a>
+</header>
+
+<a id="top"></a>
+<section class="hero">
+  <img class="hero-img" src="foto1.jpg" alt="Pasangan snorkeling di atas taman patung bawah air Gili Meno">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="eyebrow">Gili Trawangan · Gili Meno · Gili Air</div>
+    <h1>Berenang berhadapan langsung dengan <em>penyu laut</em> di Kepulauan Gili</h1>
+    <p class="hero-sub">Trip kapal bersama dan charter privat menuju terumbu karang, bangkai kapal, dan patung bawah air di sekitar Kepulauan Gili, Lombok — dipandu guide yang tahu persis di mana penyu sedang mencari makan.</p>
+    <div class="hero-actions">
+      <a class="btn-primary" href="https://wa.me/6287757385043?text=Halo%2C%20saya%20ingin%20memesan%20trip%20snorkeling%20di%20The%20Indha%20Lombok%20Explore." target="_blank" rel="noopener">Pesan trip Anda →</a>
+      <a class="btn-ghost" href="#tours">Lihat pilihan trip</a>
+    </div>
+  </div>
+</section>
+
+<section class="intro">
+  <div class="wrap grid">
+    <div>
+      <div class="section-tag">The Indha Lombok Explore</div>
+      <h2>Kapal kecil, air tenang, dan penyu yang tidak kabur.</h2>
+      <p class="lede">Kami menjalankan trip snorkeling setiap hari dari tiga Gili — Trawangan, Meno, dan Air. Setiap trip dirancang dengan satu tujuan: membuat Anda dekat dengan terumbu karang tanpa keramaian kaki katak yang mengaduk pasir di sekitar Anda. Foto dan video GoPro sudah termasuk di setiap pemesanan, jadi Anda pulang dengan bukti nyata.</p>
+    </div>
+    <div class="intro-stats">
+      <div class="stat"><b>3</b><span>Pulau Gili<br>tercakup</span></div>
+      <div class="stat"><b>5J</b><span>Trip bersama<br>terlama</span></div>
+      <div class="stat"><b>1</b><span>Taman patung<br>bawah air</span></div>
+    </div>
+  </div>
+</section>
+
+<svg class="caustic" viewBox="0 0 400 28" preserveAspectRatio="none" style="color:var(--sand)"><use href="#caustic-line" stroke="currentColor" fill="none" style="stroke:var(--reef-navy); opacity:.15"/></svg>
+
+<section class="tours" id="tours">
+  <div class="wrap">
+    <div class="section-tag">Pilih trip Anda</div>
+    <h2>Dua cara menjelajahi terumbu karang</h2>
+    <p class="lede">Ikut bersama kelompok kecil, atau sewa kapal khusus untuk rombongan Anda sendiri. Kedua trip berangkat dari Gili Trawangan, Gili Meno, atau Gili Air.</p>
+
+    <div class="tour-grid">
+      <div class="tour-card">
+        <div class="tour-head">
+          <div class="tour-name">Shared Snorkeling<span>Trip kelompok kecil</span></div>
+          <div class="tour-duration">5J<small>durasi</small></div>
+        </div>
+        <ul class="tour-list">
+          <li>Tempat snorkeling terbaik di sekitar Kepulauan Gili</li>
+          <li>Berenang bersama penyu laut liar</li>
+          <li>Terumbu karang yang hidup dan ikan tropis yang berwarna-warni</li>
+          <li>Kunjungi taman patung bawah air di Gili Meno</li>
+          <li>Hanya kelompok kecil — tidak ada kerumunan di kapal besar</li>
+          <li>Foto dan video GoPro sudah termasuk</li>
+        </ul>
+        <a class="tour-cta" href="https://wa.me/6287757385043?text=Halo%2C%20saya%20ingin%20memesan%20Shared%20Snorkeling%20Trip%20%285%20jam%29." target="_blank" rel="noopener">Pesan tempat dan tanyakan secara pribadi→</a>
+      </div>
+
+      <div class="tour-card private">
+        <div class="tour-head">
+          <div class="tour-name">Private Snorkeling<span>Kapal Anda, ritme Anda</span></div>
+          <div class="tour-duration">4J<small>durasi</small></div>
+        </div>
+        <ul class="tour-list">
+          <li>Perahu eksklusif, khusus untuk kelompok Anda</li>
+          <li>Jadwal perjalanan dan waktu keberangkatan yang fleksibel</li>
+          <li>Akses ke tempat snorkeling tersembunyi</li>
+          <li>Cocok untuk pasangan, keluarga, dan kelompok kecil</li>
+          <li>Foto dan video GoPro sudah termasuk</li>
+          <li>Tetapkan ritme Anda sendiri dan berlama-lama di mana Anda mau</li>
+        </ul>
+        <a class="tour-cta" href="https://wa.me/6287757385043?text=Halo%2C%20saya%20ingin%20menanyakan%20Private%20Snorkeling%20Trip%20%284%20jam%29." target="_blank" rel="noopener">Pesan tempat dan tanyakan secara pribadi →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="gallery" id="gallery">
+  <div class="wrap">
+    <div class="gallery-head">
+      <div>
+        <div class="section-tag">Dari trip-trip terbaru</div>
+        <h2>Apa yang sebenarnya ada di bawah sana</h2>
+      </div>
+    </div>
+
+    <div class="gallery-grid">
+      <figure class="g-wide"><img src="foto2.jpg" alt="Penyu laut hijau dari dekat dengan snorkeler di latar belakang"></figure>
+      <figure><img src="foto3.jpg" alt="Ikan badut di antara tentakel anemon"></figure>
+      <figure class="g-tall"><img src="foto4.jpg" alt="Snorkeler berenang di atas taman patung bawah air Gili Meno"></figure>
+      <figure><img src="foto5.jpg" alt="Snorkeler menyelam mendekati penyu laut"></figure>
+      <figure><img src="foto6.jpg" alt="Sekelompok snorkeler berenang di atas penyu yang sedang beristirahat"></figure>
+      <figure><img src="foto7.jpg" alt="Snorkeler berenang di samping penyu di atas terumbu karang"></figure>
+      <figure class="g-wide"><img src="foto8.jpg" alt="Snorkeler dikelilingi kawanan ikan tropis"></figure>
+      <figure><img src="foto9.jpg" alt="Snorkeler menjangkau penyu di dekat terumbu karang"></figure>
+      <figure><img src="foto10.jpg" alt="Pasangan snorkeling di atas taman patung bawah air Gili Meno"></figure>
+      <figure><img src="foto11.jpg" alt="Snorkeler menunjukkan lingkaran di atas patung bawah air"></figure>
+      <figure><img src="foto12.jpg" alt="Penyu laut beristirahat di dasar laut"></figure>
+      <figure><img src="foto13.jpg" alt="Snorkeler berenang berdampingan dengan penyu laut"></figure>
+      <figure><img src="foto14.jpg" alt="Tamu bersantai di pantai saat matahari terbenam"></figure>
+      <figure><img src="foto15.jpg" alt="Pasangan snorkeling di atas taman patung bawah air, sudut dekat"></figure>
+      <figure><img src="foto16.jpg" alt="Snorkeler menyelam mendekati penyu laut di atas terumbu karang"></figure>
+    </div>
+  </div>
+</section>
+
+<section class="departures">
+  <div class="wrap">
+    <div class="section-tag">Titik penjemputan</div>
+    <h2>Berangkat dari ketiga Gili</h2>
+    <div class="dep-map-link">
+      <a href="https://maps.google.com/?q=Gili+Islands+Lombok" target="_blank" rel="noopener">Lihat Kepulauan Gili di peta →</a>
+    </div>
+    <div class="dep-grid">
+      <div class="dep-card">
+        <div class="dep-index">01 · BARAT</div>
+        <h3>Gili Trawangan</h3>
+        <p>Pulau terbesar dari ketiganya dan titik keberangkatan utama kami, dengan pilihan waktu jemput paling banyak.</p>
+      </div>
+      <div class="dep-card">
+        <div class="dep-index">02 · TENGAH</div>
+        <h3>Gili Meno</h3>
+        <p>Paling tenang di antara ketiganya, dan rumah bagi taman patung bawah air yang termasuk dalam Shared trip.</p>
+      </div>
+      <div class="dep-card">
+        <div class="dep-index">03 · TIMUR</div>
+        <h3>Gili Air</h3>
+        <p>Paling dekat dengan daratan Lombok, dengan akses terumbu karang yang mudah langsung dari kapal.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="closing">
+  <img class="closing-img" src="foto17.jpg" alt="Matahari terbenam di atas laut dilihat dari pantai">
+  <div class="closing-overlay"></div>
+  <div class="closing-content wrap">
+    <p class="quote">Terumbu karang tidak peduli jam berapa sekarang. Trip Anda pun seharusnya begitu.</p>
+    <div class="who">Kembali ke pasir sebelum matahari terbenam</div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand">The Indha<span>Lombok Explore — Trip snorkeling bersama dan privat di sekitar Gili Trawangan, Gili Meno, dan Gili Air.</span></div>
+        <div class="foot-social">
+          <a href="https://wa.me/6287757385043?text=Halo%2C%20saya%20ingin%20bertanya%20tentang%20trip%20snorkeling%20di%20The%20Indha%20Lombok%20Explore." target="_blank" rel="noopener" aria-label="WhatsApp">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.02 2 11c0 2.28 1.02 4.34 2.7 5.87L4 22l5.46-1.44C10.28 20.85 11.13 21 12 21c5.52 0 10-4.02 10-9S17.52 2 12 2z"/></svg>
+          </a>
+          <a href="https://www.youtube.com/@theINDHA27" target="_blank" rel="noopener" aria-label="YouTube: the INDHA27">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.6 31.6 0 0 0 0 12a31.6 31.6 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.6 31.6 0 0 0 24 12a31.6 31.6 0 0 0-.5-5.8ZM9.6 15.6V8.4l6.3 3.6-6.3 3.6Z"/></svg>
+          </a>
+          <a href="https://www.facebook.com/SyukranDindayya" target="_blank" rel="noopener" aria-label="Facebook: Syukran Dindayya">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 22v-8.5h2.85l.43-3.3h-3.28V8.1c0-.96.27-1.61 1.64-1.61h1.75V3.56C16.6 3.5 15.51 3.4 14.24 3.4c-2.66 0-4.48 1.62-4.48 4.6v2.2H6.9v3.3h2.86V22h3.74Z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h4>Pesan trip</h4>
+        <a href="https://wa.me/6287757385043?text=Halo%2C%20saya%20ingin%20bertanya%20tentang%20jadwal%20trip%20snorkeling." target="_blank" rel="noopener">WhatsApp: 0877 5738 5043</a>
+        <p>Respon tercepat 07.00–21.00 (waktu Lombok)</p>
+      </div>
+      <div class="foot-col">
+        <h4>Keberangkatan</h4>
+        <p>Gili Trawangan</p>
+        <p>Gili Meno</p>
+        <p>Gili Air</p>
+      </div>
+      <div class="foot-col">
+        <h4>Lokasi</h4>
+        <a href="https://maps.google.com/?q=Gili+Islands+Lombok" target="_blank" rel="noopener">Buka Google Maps</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 The Indha Lombok Explore</span>
+      <span>Lombok, Indonesia</span>
+    </div>
+  </div>
+</footer>
+
+<div class="fab-stack">
+  <button class="fab fab-top" id="backToTop" aria-label="Kembali ke atas">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+  </button>
+</div>
+
+<script>
+  const nav = document.getElementById('siteNav');
+  const backToTop = document.getElementById('backToTop');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 40) nav.classList.add('solid');
+    else nav.classList.remove('solid');
+    if (window.scrollY > 500) backToTop.classList.add('show');
+    else backToTop.classList.remove('show');
+  });
+  backToTop.addEventListener('click', () => window.scrollTo({top: 0, behavior: 'smooth'}));
+</script>
+
+</body>
+</html>
